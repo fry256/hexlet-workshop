@@ -1,0 +1,37 @@
+{
+  "name": "fry256/hexlet-workshop",
+  "bin": ["bin/php-package"],
+  "description": "this is my hexlet workshop project", 
+  "keywords": ["hexlet workshop", "composer", "package"], 
+  "license": "MIT",
+  "type": "library",
+  "authors": [
+    {
+      "name": "Yuri Petrov",
+      "email": "up@kodix.ru"
+    }
+  ],
+  "scripts": {
+    "phpcs": "phpcs",
+    "phpcbf": "phpcbf",
+    "phpunit": "phpunit",
+    "test": "phpunit tests"
+  },
+  "autoload": {
+    "psr-4": {
+      "Fry256\\HexletWorkshop\\": "src",
+      "Fry256\\HexletWorkshop\\Tests\\": "tests"
+    }
+  },
+  "require": {
+    "tightenco/collect": "^5.6",
+    "nesbot/carbon": "^1.26",
+    "danielstjules/stringy": "^3.1"
+  },
+  "require-dev": {
+    "symfony/var-dumper": "^4.0",
+    "phpunit/phpunit": "*",
+    "squizlabs/php_codesniffer": "*",
+    "codeclimate/php-test-reporter": "dev-master"
+  }
+}
