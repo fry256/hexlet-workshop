@@ -53,10 +53,7 @@ class Client implements IClient
 
             $response =  $this->getResponse()
                 ->setStatusCode($responseStatus['statusCode'])
-                ->setBody([
-                    'code' => curl_errno($ch),
-                    'message' => curl_error($ch)
-                ])
+                ->setBody(json_decode($body, true))
                 ->setReasonPhrase($responseStatus['reasonPhrase']);
         }
 
