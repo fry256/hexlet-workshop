@@ -1,7 +1,7 @@
 <?php
 /**
  * <pre>
- * Created by:  15.09.2018 10:34
+ * Created by:  15.09.2018 10:57
  * Email:       up@kodix.ru
  * Developer:   Petrov Yuri
  * </pre>
@@ -9,28 +9,41 @@
 
 namespace Fry256\HexletWorkshop;
 
-class GeoIpService implements IServices
+use GuzzleHttp\Client;
+use GuzzleHttp\ClientInterface;
+
+class GeoIpService
 {
     const URL = 'http://ip-api.com/json/';
-    private $resultData;
-    private $parser;
 
-    public function __construct(IGeoData $resultData, IParser $parser)
+    /**
+     * @var ClientInterface
+     */
+    private $httpClient;
+
+    /**
+     * @param ClientInterface|null $client
+     */
+    public function __construct(?ClientInterface $client = null)
     {
-        $this->resultData = $resultData;
-        $this->parser = $parser;
+        $this->httpClient = $client ?? new Client();
     }
 
-    public function getByIp(string $ip): IGeoData
+    /**
+     * @param $ip
+     * @return array
+     */
+    public function getData($ip): array
     {
-        $resp = $this->query($ip);
-        $data = $this->parser->parse($resp);
-        $this->resultData->setCity($data['city']);
-
-        return $this->resultData;
+        $response = $this->httpClient->request('GET', self::URL . $ip);
+        return $this->parse($response->getBody());
     }
-    private function query(string $ip)
+    /**
+     * @param string $json
+     * @return array
+     */
+    private function parse(string $json): array
     {
-        return file_get_contents(self::URL . $ip);
+        return \json_decode($json, true);
     }
 }
