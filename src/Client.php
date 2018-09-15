@@ -13,11 +13,13 @@ class Client implements IClient
 {
     private $request;
     private $response;
+    private $parser;
 
-    public function __construct(IRequest $request, IResponse $response)
+    public function __construct(IRequest $request, IResponse $response, IParser $parser)
     {
         $this->setRequest($request);
         $this->setResponse($response);
+        $this->setParser($parser);
     }
 
     public function send() :IResponse
@@ -53,7 +55,7 @@ class Client implements IClient
 
             $response =  $this->getResponse()
                 ->setStatusCode($responseStatus['statusCode'])
-                ->setBody(json_decode($body, true))
+                ->setBody($this->getParser()->parse($body))
                 ->setReasonPhrase($responseStatus['reasonPhrase']);
         }
 
@@ -80,5 +82,17 @@ class Client implements IClient
     private function getResponse() :IResponse
     {
         return $this->response;
+    }
+
+
+
+    private function setParser($parser)
+    {
+        $this->parser = $parser;
+    }
+
+    private function getParser() :IParser
+    {
+        return $this->parser;
     }
 }

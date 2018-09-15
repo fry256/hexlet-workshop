@@ -9,7 +9,7 @@
 namespace Fry256\HexletWorkshop\Tests;
 
 use \PHPUnit\Framework\TestCase;
-use \Fry256\HexletWorkshop\{Client, Response, Request};
+use \Fry256\HexletWorkshop\{Client, Response, Request, JsonParser};
 
 class ClientTestTest extends TestCase
 {
@@ -17,7 +17,8 @@ class ClientTestTest extends TestCase
     {
         $client = new Client(
             new Request('http://ip-api.com', '/json/134.234.3.2'),
-            new Response()
+            new Response(),
+            new JsonParser()
         );
         $this->assertEquals(
             json_decode('{"as":"AS1586 DoD Network Information Center","city":"Sierra Vista (Fort Huachuca)","country":"United States","countryCode":"US","isp":"","lat":31.5552,"lon":-110.35,"org":"","query":"134.234.3.2","region":"","regionName":"Arizona","status":"success","timezone":"America/Phoenix","zip":"85613"}', true),
