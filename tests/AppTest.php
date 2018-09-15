@@ -10,7 +10,7 @@ namespace Fry256\HexletWorkshop\Tests;
 
 use \PHPUnit\Framework\TestCase;
 use Fry256\HexletWorkshop\{
-    App, GeoIpService, GeoData
+    App, GeoIpService, GeoData, JsonParser
 };
 
 class AppTest extends TestCase
@@ -19,7 +19,8 @@ class AppTest extends TestCase
     {
         $app = new App(
             new GeoIpService(
-                new GeoData()
+                new GeoData(),
+                new JsonParser()
             )
         );
         $this->assertEquals(
