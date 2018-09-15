@@ -20,8 +20,8 @@ class ClientTestTest extends TestCase
             new Response()
         );
         $this->assertEquals(
-            json_decode('{"as":"AS1586 DoD Network Information Center","city":"Sierra Vista (Fort Huachuca)","country":"United States","countryCode":"US","isp":"","lat":31.5552,"lon":-110.35,"org":"","query":"134.234.3.2","region":"","regionName":"Arizona","status":"success","timezone":"America/Phoenix","zip":"85613"}'),
-            $client->send()
+            json_decode('{"as":"AS1586 DoD Network Information Center","city":"Sierra Vista (Fort Huachuca)","country":"United States","countryCode":"US","isp":"","lat":31.5552,"lon":-110.35,"org":"","query":"134.234.3.2","region":"","regionName":"Arizona","status":"success","timezone":"America/Phoenix","zip":"85613"}', true),
+            $client->send()->getBody()
         );
     }
 }

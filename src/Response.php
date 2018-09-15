@@ -17,9 +17,13 @@ class Response implements IResponse
 
     public function __construct(int $statusCode = 400, array $body = [], string $reasonPhrase = 'Bad request')
     {
-        $this->setBody($body);
+
+        $this->body = $body;
+        $this->statusCode = $statusCode;
+        $this->reasonPhrase = $reasonPhrase;
+        /*$this->setBody($body);
         $this->setReasonPhrase($reasonPhrase);
-        $this->setStatusCode($statusCode);
+        $this->setStatusCode($statusCode);*/
     }
 
     public function getBody() :array
