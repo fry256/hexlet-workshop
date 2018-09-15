@@ -1,7 +1,7 @@
 <?php
 /**
  * <pre>
- * Created by:  15.09.2018 9:33
+ * Created by:  15.09.2018 10:45
  * Email:       up@kodix.ru
  * Developer:   Petrov Yuri
  * </pre>
@@ -9,7 +9,8 @@
 
 namespace Fry256\HexletWorkshop;
 
-interface IParser
+interface IGeoData
 {
-    public function parse(string $string) :array;
+    public function setCity($city);
+    public function getCity() :string;
 }
