@@ -1,0 +1,15 @@
+#!/usr/bin/env php
+
+<?php
+
+require_once __DIR__ . "/../vendor/autoload.php";
+
+$weatherFactory = new \Fry256\HexletWorkshop\WeatherFactory();
+
+$weather = $weatherFactory->getForecast($argv[3], $argv[2]);
+
+echo $weather->getTemperature() . PHP_EOL;
+echo $weather->getAirPressure() . PHP_EOL;
+echo $weather->getHumidity() . PHP_EOL;
+echo $weather->getWindSpeed() . PHP_EOL;
+
