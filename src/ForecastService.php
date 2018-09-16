@@ -21,15 +21,21 @@ class ForecastService
         'openweather' => OpenWeatherMap::class,
     ];
 
-    public function __construct($serviceName)
+    /**
+     * ForecastService constructor.
+     * @param $serviceName
+     * @param array $options
+     */
+    public function __construct($serviceName, $options = [])
     {
+        $httpClient = $options['httpClient'] ?? null;
         try{
-            $service = new $serviceName;
+            $service = new $serviceName($httpClient);
         }catch (\Error $exception){
             if (!isset(self::$services[$serviceName])) {
                 throw new \InvalidArgumentException('Service not supported');
             }
-            $service = new self::$services[$serviceName];
+            $service = new self::$services[$serviceName]($httpClient);
         }
 
         $this->currentService = $service;
