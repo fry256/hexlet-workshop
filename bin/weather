@@ -4,9 +4,10 @@
 
 require_once __DIR__ . "/../vendor/autoload.php";
 
-$weatherFactory = new \Fry256\HexletWorkshop\WeatherFactory();
+$weatherFactory = new \Fry256\HexletWorkshop\ForecastService($argv[2]);
 
-$weather = $weatherFactory->getForecast($argv[3], $argv[2]);
+//$weather = $weatherFactory->getForecast($argv[3]);
+$weather = $weatherFactory->getForecast($argv[3], new \Fry256\HexletWorkshop\MetaWeather());
 
 echo $weather->getTemperature() . PHP_EOL;
 echo $weather->getAirPressure() . PHP_EOL;

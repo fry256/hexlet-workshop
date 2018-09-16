@@ -12,7 +12,7 @@ namespace Fry256\HexletWorkshop;
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
 
-class MetaWeather
+class MetaWeather implements IWeatherService
 {
     const URL = 'https://www.metaweather.com/api/location';
     /**

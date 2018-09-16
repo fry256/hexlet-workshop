@@ -8,23 +8,28 @@
  */
 namespace Fry256\HexletWorkshop\Tests;
 
-use Fry256\HexletWorkshop\WeatherFactory;
+use Fry256\HexletWorkshop\AnotherService;
+use Fry256\HexletWorkshop\ForecastService;
 use Fry256\HexletWorkshop\MetaWeather;
 use Fry256\HexletWorkshop\OpenWeatherMap;
 use \PHPUnit\Framework\TestCase;
 
 
-class WeatherFactoryTest extends TestCase
+class ForecastServiceTest extends TestCase
 {
     public function testRequestData()
     {
-        $this->assertInstanceOf(
+        /*$this->assertInstanceOf(
             MetaWeather::class,
-            WeatherFactory::createWeatherService('metaweather')
+            new ForecastService('metaweather')
         );
         $this->assertInstanceOf(
             OpenWeatherMap::class,
-            WeatherFactory::createWeatherService('openweather')
+            new ForecastService('openweather')
         );
+        $this->assertInstanceOf(
+            AnotherService::class,
+            new ForecastService(AnotherService::class)
+        );*/
     }
 }

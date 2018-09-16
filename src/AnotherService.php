@@ -1,7 +1,7 @@
 <?php
 /**
  * <pre>
- * Created by:  15.09.2018 16:51
+ * Created by:  15.09.2018 16:54
  * Email:       up@kodix.ru
  * Developer:   Petrov Yuri
  * </pre>
@@ -9,15 +9,12 @@
 
 namespace Fry256\HexletWorkshop;
 
-
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
 
-class OpenWeatherMap implements IWeatherService
+class AnotherService implements IWeatherService
 {
-    const URL = 'http://openweathermap.org/data/2.5/weather';
-    const API_KEY = 'b6907d289e10d714a6e88b30761fae22';
-
+    const URL = 'https://www.some-weather-site.com/api/';
     /**
      * @var ClientInterface
      */
@@ -31,15 +28,13 @@ class OpenWeatherMap implements IWeatherService
         $this->httpClient = $client ?? new Client();
     }
 
-    /**
-     * @param string $city
-     * @return WeatherInfo
-     */
-    public function getInfo(string $city) :WeatherInfo
+    public function getInfo(string $city): WeatherInfo
     {
-        $response = $this->httpClient->request('GET', self::URL . 'q=' . $city . '&appid=' . self::API_KEY);
+        $response = $this->httpClient->request('GET', self::URL . '/' . $city);
+
         return $this->parse($response->getBody());
     }
+
     /**
      * @param string $json
      * @return WeatherInfo
@@ -49,10 +44,10 @@ class OpenWeatherMap implements IWeatherService
         $weather = \json_decode($json, true);
 
         return new WeatherInfo(
-            $weather['main']['temp'],
-            $weather['main']['pressure'],
-            $weather['main']['humidity'],
-            $weather['wind']['speed']
+            $weather['temp'],
+            $weather['pressure'],
+            $weather['humidity'],
+            $weather['wind']
         );
     }
 }
